@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Source_Sans_3 } from "next/font/google";
+import { Fraunces, Source_Sans_3, Bebas_Neue, Great_Vibes } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CookieBanner } from "@/components/layout/CookieBanner";
@@ -20,6 +20,20 @@ const sourceSans = Source_Sans_3({
   display: "swap",
 });
 
+const bebasNeue = Bebas_Neue({
+  variable: "--font-bebas",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
+const greatVibes = Great_Vibes({
+  variable: "--font-great-vibes",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export const metadata: Metadata = {
@@ -29,7 +43,7 @@ export const metadata: Metadata = {
     template: "%s — RoseAudit",
   },
   description:
-    "Premium financial coaching and digital products from Rose M. Apabeloi, State-Authorized Accountant. Corporate-grade financial strategy for homes, businesses, and the next generation.",
+    "Premium financial coaching and digital products from Rose M. Apabeloi. Corporate-grade financial strategy for homes, businesses, and the next generation.",
   keywords: ["financial coaching", "wealth architecture", "PLR products", "Norwegian accountant", "personal finance"],
   authors: [{ name: "Rose M. Apabeloi" }],
   creator: "Rose M. Apabeloi",
@@ -39,13 +53,13 @@ export const metadata: Metadata = {
     siteName: "RoseAudit",
     title: "RoseAudit — Wealth Architecture for Generational Legacy",
     description:
-      "Premium financial coaching and digital products from Rose M. Apabeloi, State-Authorized Accountant.",
+      "Premium financial coaching and digital products from Rose M. Apabeloi.",
   },
   twitter: {
     card: "summary_large_image",
     title: "RoseAudit — Wealth Architecture for Generational Legacy",
     description:
-      "Premium financial coaching and digital products from Rose M. Apabeloi, State-Authorized Accountant.",
+      "Premium financial coaching and digital products from Rose M. Apabeloi.",
   },
   robots: {
     index: true,
@@ -60,7 +74,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${sourceSans.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${fraunces.variable} ${sourceSans.variable} ${bebasNeue.variable} ${greatVibes.variable} h-full antialiased`}
+    >
       <body className="flex min-h-full flex-col font-sans">
         {/* Skip navigation — visible only on keyboard focus */}
         <a
@@ -72,10 +89,12 @@ export default function RootLayout({
 
         <CartProvider>
           <Header />
-          <div id="main-content" tabIndex={-1} className="flex-1 outline-none">
-            {children}
+          <div className="flex min-h-0 flex-1 flex-col lg:ml-[var(--sidebar-w)]">
+            <div id="main-content" tabIndex={-1} className="flex-1 outline-none">
+              {children}
+            </div>
+            <Footer />
           </div>
-          <Footer />
         </CartProvider>
 
         <CookieBanner />

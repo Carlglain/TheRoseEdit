@@ -1,7 +1,7 @@
 "use client";
 
+import Image from "next/image";
 import { useCart } from "./CartContext";
-import { Badge } from "@/components/ui/Badge";
 import { formatPrice } from "@/lib/format";
 import { PRODUCT_TYPE_LABELS } from "@/lib/constants";
 import type { Product } from "@/types";
@@ -15,14 +15,26 @@ export function CartLineItem({ product }: CartLineItemProps) {
 
   return (
     <div className="flex items-center gap-4 rounded-brand border border-line bg-white p-4">
-      <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-[10px] bg-line">
-        <span className="text-[10px] text-muted">Cover</span>
+      <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-[10px] bg-line">
+        {product.coverImageUrl ? (
+          <Image
+            src={product.coverImageUrl}
+            alt={product.name}
+            fill
+            className="object-cover"
+            sizes="64px"
+          />
+        ) : (
+          <span className="flex h-full items-center justify-center text-[10px] text-muted">
+            Cover
+          </span>
+        )}
       </div>
 
       <div className="min-w-0 flex-1">
-        <Badge variant="gold" className="mb-1">
+        <p className="mb-1 text-[10px] font-medium uppercase tracking-[0.15em] text-gold">
           {PRODUCT_TYPE_LABELS[product.type]}
-        </Badge>
+        </p>
         <h3 className="truncate font-heading text-base text-ink">{product.name}</h3>
         <p className="mt-1 text-xs text-muted">Qty 1 · Digital download</p>
       </div>

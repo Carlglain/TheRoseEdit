@@ -105,10 +105,10 @@ export default function TermsPage() {
       <h2 className={prose.h2}>7. Disclaimer</h2>
       <p className={prose.p}>
         Educational content on this site is for informational purposes only and does not
-        constitute professional financial, tax, or legal advice. While Rose M. Apabeloi is a
-        State-Authorized Accountant, the products and coaching offered through {SITE_NAME}
-        are general educational resources, not regulated financial advisory services. Always
-        consult a qualified professional for your specific situation.
+        constitute professional financial, tax, or legal advice. Rose M. Apabeloi is an
+        accountant with a Master&apos;s in Accounting &amp; Auditing; the products and coaching
+        offered through {SITE_NAME} are general educational resources, not regulated financial
+        advisory services. Always consult a qualified professional for your specific situation.
       </p>
       <p className={prose.p}>
         We make reasonable efforts to ensure accuracy but do not warrant that the site is

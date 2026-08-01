@@ -8,7 +8,7 @@ const productRowSchema = z.object({
   id: z.string().uuid(),
   slug: z.string(),
   name: z.string(),
-  type: z.enum(["ebook", "course", "vendor_list"]),
+  type: z.enum(["ebook", "course", "vendor_list", "resource"]),
   description: z.string(),
   price_minor: z.number().int().nonnegative(),
   currency: z.string(),
@@ -74,6 +74,20 @@ export async function getProductsByType(type: ProductType): Promise<Product[]> {
   return z.array(productRowSchema).parse(data).map(toProduct);
 }
 
+/** Shop-only catalogue — excludes e-books, courses, and vendor lists. */
+export async function getShopProducts(): Promise<Product[]> {
+  const supabase = createServiceRoleClient();
+  const { data, error } = await supabase
+    .from("products")
+    .select("*")
+    .eq("type", "resource")
+    .eq("is_published", true)
+    .order("created_at", { ascending: false });
+
+  if (error) throw error;
+  return z.array(productRowSchema).parse(data).map(toProduct);
+}
+
 // Used by the cart/checkout flow — looks up by primary key, ignoring is_published, so a
 // product that goes unpublished mid-checkout still resolves (callers decide what to do with it).
 export async function getProductsByIds(ids: string[]): Promise<Product[]> {
@@ -104,6 +118,14 @@ export const getProductBySlug = cache(async (slug: string): Promise<Product | nu
 export async function getProductsSafe(type?: ProductType): Promise<Product[]> {
   try {
     return type ? await getProductsByType(type) : await getPublishedProducts();
+  } catch {
+    return [];
+  }
+}
+
+export async function getShopProductsSafe(): Promise<Product[]> {
+  try {
+    return await getShopProducts();
   } catch {
     return [];
   }

@@ -22,14 +22,19 @@ export function Footer() {
   const whatsappUrl = process.env.CONTACT_WHATSAPP ?? "";
 
   return (
-    <footer className="bg-ink text-cream">
+    <footer
+      className="text-cream"
+      style={{
+        background: "linear-gradient(165deg, #062816 0%, #0B3D2C 50%, #1A6B45 100%)",
+      }}
+    >
       <Container className="py-16 md:py-20">
-        <div className="grid gap-12 md:grid-cols-3 md:gap-8">
-          {/* Brand */}
+        <div className="grid gap-12 md:grid-cols-3 md:gap-10">
           <div>
             <span className="font-heading text-xl tracking-tight">{SITE_NAME}</span>
-            <p className="mt-3 max-w-xs text-sm leading-relaxed text-cream/60">
-              Corporate-grade financial strategy for homes, businesses, and the next generation.
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-cream/55">
+              Architect true financial freedom — for your home, your business, and the next
+              generation.
             </p>
             <div className="mt-6 flex flex-col gap-2 text-sm">
               <Link
@@ -51,9 +56,8 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Navigate */}
           <div>
-            <span className="text-xs font-medium uppercase tracking-widest text-cream/50">
+            <span className="text-xs font-medium uppercase tracking-widest text-cream/45">
               Navigate
             </span>
             <ul className="mt-4 grid grid-cols-2 gap-2.5 text-sm">
@@ -70,12 +74,11 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Newsletter */}
           <div>
-            <span className="text-xs font-medium uppercase tracking-widest text-cream/50">
+            <span className="text-xs font-medium uppercase tracking-widest text-cream/45">
               Stay Connected
             </span>
-            <p className="mt-4 text-sm leading-relaxed text-cream/60">
+            <p className="mt-4 text-sm leading-relaxed text-cream/55">
               Join the community of wealth architects. No spam, ever.
             </p>
             <div className="mt-4">
@@ -91,7 +94,7 @@ export function Footer() {
             {PAYMENT_METHODS.map(({ name, Icon }) => (
               <span
                 key={name}
-                className="flex items-center gap-1.5 rounded-brand border border-white/10 px-2 py-1 text-xs text-cream/60"
+                className="flex items-center gap-1.5 rounded-brand border border-white/10 px-2 py-1 text-xs text-cream/55"
               >
                 <Icon />
                 {name}
@@ -99,7 +102,7 @@ export function Footer() {
             ))}
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-cream/60">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-cream/50">
             {LEGAL_LINKS.map((link) => (
               <Link
                 key={link.href}
@@ -112,7 +115,7 @@ export function Footer() {
           </div>
         </div>
 
-        <p className="mt-6 text-xs text-cream/50">
+        <p className="mt-6 text-xs text-cream/40">
           © {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
         </p>
       </Container>

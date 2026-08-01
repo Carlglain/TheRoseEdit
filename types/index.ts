@@ -1,4 +1,4 @@
-export type ProductType = "ebook" | "course" | "vendor_list";
+export type ProductType = "ebook" | "course" | "vendor_list" | "resource";
 
 export interface Product {
   id: string;

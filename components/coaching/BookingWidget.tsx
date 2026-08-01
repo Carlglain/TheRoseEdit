@@ -2,6 +2,7 @@
 
 import { useActionState } from "react";
 import { Button } from "@/components/ui/Button";
+import { CalEmbed } from "@/components/coaching/CalEmbed";
 import {
   createCoachingCheckoutSession,
   type CoachingCheckoutState,
@@ -18,37 +19,12 @@ const initialState: CoachingCheckoutState = {};
 
 export function BookingWidget({ mode, bookingUrl }: BookingWidgetProps) {
   if (mode === "embed") {
-    return <EmbedWidget bookingUrl={bookingUrl ?? ""} />;
+    return <CalEmbed bookingUrl={bookingUrl ?? ""} />;
   }
   if (mode === "pay-first") {
     return <PayFirstWidget />;
   }
   return <ContactWidget />;
-}
-
-function EmbedWidget({ bookingUrl }: { bookingUrl: string }) {
-  return (
-    <div>
-      <iframe
-        src={bookingUrl}
-        className="w-full rounded-brand border border-line"
-        style={{ minHeight: 620 }}
-        title="Book your 1:1 coaching call"
-        loading="lazy"
-      />
-      <p className="mt-3 text-center text-xs text-muted">
-        Calendar not loading?{" "}
-        <a
-          href={bookingUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-emerald underline underline-offset-2 transition-opacity hover:opacity-80"
-        >
-          Open in a new tab →
-        </a>
-      </p>
-    </div>
-  );
 }
 
 function PayFirstWidget() {
@@ -87,7 +63,7 @@ function PayFirstWidget() {
       </Button>
 
       <p className="text-center text-xs text-muted">
-        Secure checkout via Stripe. You will be sent a scheduling link after payment.
+        Secure checkout via Stripe. After payment you will pick your session time on the calendar.
       </p>
     </form>
   );

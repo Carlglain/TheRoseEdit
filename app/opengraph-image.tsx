@@ -65,7 +65,7 @@ export default function Image() {
             marginTop: "4px",
           }}
         >
-          Rose M. Apabeloi · State-Authorized Accountant · Norway
+          Rose M. Apabeloi · Accountant · Norway
         </div>
       </div>
 

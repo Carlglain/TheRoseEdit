@@ -1,14 +1,11 @@
-import Link from 'next/link';
 import Image from 'next/image';
 import { TrendingUp, Building2, BookOpen, ShieldCheck, Award, Globe, CircleCheck, CircleX } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { Heading } from '@/components/ui/Heading';
 import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/ui/Reveal';
-import { ProductCard } from '@/components/ui/ProductCard';
 import { NewsletterForm } from '@/components/layout/NewsletterForm';
-import { IS_FOR_YOU, NOT_FOR_YOU, SITE_NAME } from '@/lib/constants';
-import { getProductsSafe } from '@/lib/products';
+import { IS_FOR_YOU, NOT_FOR_YOU } from '@/lib/constants';
 
 const PILLARS = [
   {
@@ -34,20 +31,13 @@ const PILLARS = [
 const STATS = [
   { num: '12+', label: 'Years Experience' },
   { num: '3', label: 'Core Programmes' },
-  { Icon: ShieldCheck, label: 'State-Authorized Accountant' },
-  { Icon: Globe, label: 'Norway Registered' },
+  { Icon: ShieldCheck, label: 'Master\'s · BI Norwegian Business School' },
+  { Icon: Globe, label: 'Norway Based' },
 ];
 
 const portraitUrl = process.env.PORTRAIT_URL ?? '';
 
-async function getFeaturedProducts() {
-  const products = await getProductsSafe();
-  return products.slice(0, 3);
-}
-
-export default async function Home() {
-  const featuredProducts = await getFeaturedProducts();
-
+export default function Home() {
   return (
     <main>
       {/* ── 1. Hero ─────────────────────────────────────────────────── */}
@@ -71,22 +61,33 @@ export default async function Home() {
         </div>
 
         <Container className="relative z-10 pb-24 pt-28 lg:pb-32 lg:pt-0">
-          <div className="hero-enter max-w-[560px]">
-            <p className="font-heading text-3xl font-light tracking-tight text-white sm:text-4xl md:text-5xl">
-              {SITE_NAME}
-            </p>
+          <div className="hero-enter max-w-[640px]">
+            
+            <div className="promo-lockup mt-8">
+              <h1 className="font-display text-[clamp(2.2rem,8vw,4.25rem)] text-white">
+                Real Coaching.
+                <br />
+                Resellable Products.
+              </h1>
+              <p className="promo-script font-script text-[clamp(2.25rem,6vw,3.75rem)] text-gold">
+                Start Selling Today
+              </p>
+            </div>
 
-            <Heading level={1} className="mt-6 text-white/90 !text-2xl sm:!text-3xl md:!text-4xl font-light">
-              From corporate books to family legacies
-            </Heading>
-
-            <p className="mt-5 max-w-md text-base leading-relaxed text-white/65 sm:text-lg">
-              Corporate-grade financial strategy for your home, your business,
-              and the next generation.
-            </p>
+            <div className="mt-8 max-w-lg space-y-4 text-base leading-relaxed text-white/65 sm:text-lg">
+              <p>
+                Stop surviving the fragile grind. It&apos;s time to architect true
+                financial freedom.
+              </p>
+              <p>
+                Discover the exact, simple frameworks to automate your budget,
+                eliminate your debt, and multiply your cash flow—not through
+                restriction, but by managing wealth like a true steward.
+              </p>
+            </div>
 
             <div className="mt-10 flex flex-wrap gap-3">
-              <Button href="#audit-kit" size="lg">Start Your Audit</Button>
+              <Button href="/coaching" size="lg">Book a Coaching Call</Button>
               <Button href="/shop" variant="ghost-dark" size="lg">Explore Products</Button>
             </div>
           </div>
@@ -94,14 +95,14 @@ export default async function Home() {
       </section>
 
       {/* ── 2. Trust strip ──────────────────────────────────────────── */}
-      <div className="border-y border-white/10 bg-forest">
+      <div className="border-y border-white/10 bg-forest/95">
         <Container>
-          <div className="flex flex-wrap items-center justify-center gap-y-3 divide-x divide-white/10 py-5">
+          <div className="flex flex-wrap items-center justify-center gap-y-3 divide-x divide-white/10 py-6">
             {STATS.map(({ num, Icon, label }) => (
-              <div key={label} className="flex items-center gap-2.5 px-5 py-1 sm:px-7">
-                {Icon && <Icon size={15} className="text-emerald" strokeWidth={1.5} />}
+              <div key={label} className="flex items-center gap-2.5 px-5 py-1 sm:px-8">
+                {Icon && <Icon size={15} className="text-gold" strokeWidth={1.5} />}
                 {num && <span className="font-heading text-xl text-white">{num}</span>}
-                <span className="text-xs tracking-wide text-white/45">{label}</span>
+                <span className="text-xs tracking-wide text-white/50">{label}</span>
               </div>
             ))}
           </div>
@@ -158,48 +159,7 @@ export default async function Home() {
         </Container>
       </section>
 
-      {/* ── 4. Featured products ────────────────────────────────────── */}
-      <section className="bg-white py-24 md:py-32">
-        <Container>
-          <Reveal>
-            <div className="mb-14 flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <p className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-emerald">
-                  Shop
-                </p>
-                <Heading level={2}>Start Building Today</Heading>
-              </div>
-              <Link
-                href="/shop"
-                className="text-sm text-muted transition-colors duration-200 hover:text-emerald"
-              >
-                View all products →
-              </Link>
-            </div>
-          </Reveal>
-
-          {featuredProducts.length > 0 ? (
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {featuredProducts.map((product, i) => (
-                <Reveal key={product.id} delay={i * 80}>
-                  <ProductCard product={product} />
-                </Reveal>
-              ))}
-            </div>
-          ) : (
-            <Reveal>
-              <div className="border-y border-line py-16 text-center">
-                <p className="text-muted">New products are on the way — check back soon.</p>
-                <div className="mt-6">
-                  <Button href="/shop" variant="secondary">Browse the Shop</Button>
-                </div>
-              </div>
-            </Reveal>
-          )}
-        </Container>
-      </section>
-
-      {/* ── 5. About teaser ─────────────────────────────────────────── */}
+      {/* ── About teaser ───────────────────────────────────────────── */}
       <section className="gradient-forest py-24 md:py-32">
         <Container>
           <div className="grid items-center gap-12 md:grid-cols-2 md:gap-20">
@@ -209,16 +169,16 @@ export default async function Home() {
               </p>
               <Heading level={2} className="text-white">Rose M. Apabeloi</Heading>
               <p className="mt-5 leading-relaxed text-white/55">
-                A State-Authorized Accountant with 12+ years bridging corporate
-                accounting, strategic taxation, and entrepreneurship — Rose
-                founded RoseAudit to bring corporate-grade financial strategy to
-                homes, businesses, and the next generation.
+                An accountant and wealth strategist with 12+ years bridging corporate
+                accounting, strategic taxation, and entrepreneurship — Rose founded
+                RoseAudit to bring corporate-grade financial strategy to homes,
+                businesses, and the next generation.
               </p>
 
               <div className="mt-8 space-y-2">
                 {[
-                  { Icon: Award, text: "Master's · BI Norwegian Business School" },
-                  { Icon: ShieldCheck, text: 'State-Authorized Accountant' },
+                  { Icon: Award, text: "Master's in Accounting & Auditing · BI Norwegian Business School" },
+                  { Icon: ShieldCheck, text: '12+ years in corporate finance' },
                 ].map(({ Icon, text }) => (
                   <div key={text} className="flex items-center gap-2.5 text-sm text-white/45">
                     <Icon size={14} className="text-emerald" strokeWidth={1.5} />
@@ -258,7 +218,7 @@ export default async function Home() {
       </section>
 
       {/* ── 6. Lead magnet ──────────────────────────────────────────── */}
-      <section id="audit-kit" className="bg-cream py-24 md:py-32">
+      <section id="starter-kit" className="bg-cream py-24 md:py-32">
         <Container>
           <Reveal>
             <div className="mx-auto max-w-lg text-center">
@@ -267,11 +227,11 @@ export default async function Home() {
               </p>
               <Heading level={2}>Get a Free Sneak Peek</Heading>
               <p className="mt-4 text-muted">
-                A practical starter audit kit for your own finances — no fluff,
+                A practical starter kit for your own finances — no fluff,
                 no gimmicks.
               </p>
               <div className="mx-auto mt-8 max-w-md">
-                <NewsletterForm theme="light" source="home-audit-kit" />
+                <NewsletterForm theme="light" source="home-starter-kit" />
               </div>
               <p className="mt-3 text-xs text-muted/70">No spam. Unsubscribe anytime.</p>
             </div>
@@ -280,7 +240,7 @@ export default async function Home() {
       </section>
 
       {/* ── 7. Is this for you ──────────────────────────────────────── */}
-      <section className="border-t border-line bg-white py-24 md:py-32">
+      <section className="section-soft border-t border-line py-24 md:py-32">
         <Container>
           <Reveal>
             <div className="mx-auto mb-14 max-w-lg text-center">

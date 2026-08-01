@@ -9,7 +9,7 @@ import { BookingWidget, type BookingMode } from "@/components/coaching/BookingWi
 export const metadata: Metadata = {
   title: "1:1 Coaching Call",
   description:
-    "Book a 45-minute 1:1 financial strategy session with Rose M. Apabeloi, State-Authorized Accountant. $120. Walk away with a personalised wealth architecture plan.",
+    "Book a 45-minute 1:1 financial strategy session with Rose M. Apabeloi. $120. Walk away with a personalised wealth architecture plan.",
   openGraph: {
     title: "1:1 Coaching Call with Rose M. Apabeloi — $120 / 45 min",
     description: "Personalised financial strategy session. Walk away with a clear, actionable wealth architecture plan.",
@@ -24,11 +24,29 @@ const OUTCOMES = [
   "Honest answers to the financial questions you have been afraid to ask",
 ];
 
-const STEPS = [
+const STEPS_PAY_FIRST = [
   {
     n: "01",
     title: "Book & Pay",
-    body: "Complete the short form below and pay securely via Stripe. You will receive a confirmation email with next steps.",
+    body: "Pay securely via Stripe, then pick a live available slot on the calendar. Rose is notified on Google Calendar the moment you book.",
+  },
+  {
+    n: "02",
+    title: "Prepare",
+    body: "Rose will send a short prep question so she can tailor the session to your exact situation before you join.",
+  },
+  {
+    n: "03",
+    title: "Your Session",
+    body: "45 minutes of undivided, expert-level attention. No generic advice — just a focused plan built around you.",
+  },
+];
+
+const STEPS_EMBED = [
+  {
+    n: "01",
+    title: "Pick a Slot",
+    body: "Choose a live available time on the calendar below. Rose manages her availability in Cal.com — what you see is what’s open.",
   },
   {
     n: "02",
@@ -43,7 +61,6 @@ const STEPS = [
 ];
 
 const CREDENTIALS = [
-  "State-Authorized Accountant (Norway)",
   "Master's in Accounting & Auditing — BI Norwegian Business School, 2022",
   "12+ years in corporate accounting, strategic taxation, and entrepreneurship",
   "Founder of RoseAudit",
@@ -51,8 +68,8 @@ const CREDENTIALS = [
 
 const FAQ = [
   {
-    q: "What happens after I pay?",
-    a: "You will receive a receipt by email and a link to choose your session time via our scheduling tool. Sessions are booked within the next 14 days.",
+    q: "What happens after I book?",
+    a: "You pick from Rose's real available times. The booking syncs to her Google Calendar and you'll get a confirmation with the video link.",
   },
   {
     q: "What platform is the call on?",
@@ -60,7 +77,7 @@ const FAQ = [
   },
   {
     q: "Can I reschedule?",
-    a: "Yes — up to 24 hours before your session at no charge. Use the contact form to rearrange.",
+    a: "Yes — up to 24 hours before your session at no charge. Use the contact form or your booking confirmation to rearrange.",
   },
 ];
 
@@ -75,6 +92,7 @@ function getWidgetConfig(): { mode: BookingMode; bookingUrl: string } {
 
 export default function CoachingPage() {
   const { mode, bookingUrl } = getWidgetConfig();
+  const steps = mode === "pay-first" ? STEPS_PAY_FIRST : STEPS_EMBED;
 
   return (
     <main>
@@ -162,7 +180,7 @@ export default function CoachingPage() {
           </Reveal>
 
           <div className="grid gap-8 md:grid-cols-3">
-            {STEPS.map((step, i) => (
+            {steps.map((step, i) => (
               <Reveal key={step.n} delay={i * 100}>
                 <div className="h-full rounded-brand border border-line p-8">
                   <span className="font-heading text-3xl text-gold/40">{step.n}</span>
@@ -185,7 +203,7 @@ export default function CoachingPage() {
               </span>
               <Heading level={2}>Rose M. Apabeloi</Heading>
               <p className="mt-4 leading-relaxed text-muted">
-                Rose is a State-Authorized Accountant who has spent 12+ years inside corporate
+                Rose is an accountant who has spent 12+ years inside corporate
                 accounting, strategic taxation, and entrepreneurship. She founded RoseAudit to
                 close the gap between complex financial systems and the families and business
                 owners who need them most.
