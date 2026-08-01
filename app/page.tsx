@@ -5,7 +5,8 @@ import { Heading } from '@/components/ui/Heading';
 import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/ui/Reveal';
 import { NewsletterForm } from '@/components/layout/NewsletterForm';
-import { IS_FOR_YOU, NOT_FOR_YOU } from '@/lib/constants';
+import { IS_FOR_YOU, NOT_FOR_YOU, SITE_NAME } from '@/lib/constants';
+import { PORTRAITS } from '@/lib/portraits';
 
 const PILLARS = [
   {
@@ -35,60 +36,98 @@ const STATS = [
   { Icon: Globe, label: 'Norway Based' },
 ];
 
-const portraitUrl = process.env.PORTRAIT_URL ?? '';
-
 export default function Home() {
   return (
     <main>
       {/* ── 1. Hero ─────────────────────────────────────────────────── */}
       <section className="relative flex min-h-[92vh] items-center overflow-hidden">
         <div className="absolute inset-0">
-          {portraitUrl ? (
-            <Image
-              src={portraitUrl}
-              fill
-              className="object-cover object-right-top"
-              priority
-              alt="Rose M. Apabeloi"
-              sizes="100vw"
-            />
-          ) : (
-            <div className="absolute inset-0 gradient-forest" />
-          )}
-
-          <div className="absolute inset-0 gradient-hero-overlay" />
+          <div className="absolute inset-0 gradient-forest" />
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                'radial-gradient(ellipse 55% 65% at 78% 42%, rgba(47,158,87,0.28) 0%, transparent 70%)',
+            }}
+          />
           <div className="absolute inset-0 gradient-hero-bottom" />
         </div>
 
-        <Container className="relative z-10 pb-24 pt-28 lg:pb-32 lg:pt-0">
-          <div className="hero-enter max-w-[640px]">
-            
-            <div className="promo-lockup mt-8">
-              <h1 className="font-display text-[clamp(2.2rem,8vw,4.25rem)] text-white">
-                Real Coaching.
-                <br />
-                Resellable Products.
-              </h1>
-              <p className="promo-script font-script text-[clamp(2.25rem,6vw,3.75rem)] text-gold">
-                Start Selling Today
-              </p>
+        <Container className="relative z-10 pb-24 pt-28 lg:pb-32 lg:pt-24">
+          <div className="grid items-center gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-20">
+            <div className="hero-enter max-w-[640px]">
+              <div className="promo-lockup mt-8">
+                <h1 className="font-display text-[clamp(2.2rem,8vw,4.25rem)] text-white">
+                  Real Coaching.
+                  <br />
+                  Resellable Products.
+                </h1>
+                <p className="promo-script font-script text-[clamp(2.25rem,6vw,3.75rem)] text-gold">
+                  Start Selling Today
+                </p>
+              </div>
+
+              <div className="mt-8 max-w-lg space-y-4 text-base leading-relaxed text-white/65 sm:text-lg">
+                <p>
+                  Stop surviving the fragile grind. It&apos;s time to architect true
+                  financial freedom.
+                </p>
+                <p>
+                  Discover the exact, simple frameworks to automate your budget,
+                  eliminate your debt, and multiply your cash flow—not through
+                  restriction, but by managing wealth like a true steward.
+                </p>
+              </div>
+
+              <div className="mt-10 flex flex-wrap gap-3">
+                <Button href="/coaching" size="lg">Book a Coaching Call</Button>
+                <Button href="/shop" variant="ghost-dark" size="lg">Explore Products</Button>
+              </div>
             </div>
 
-            <div className="mt-8 max-w-lg space-y-4 text-base leading-relaxed text-white/65 sm:text-lg">
-              <p>
-                Stop surviving the fragile grind. It&apos;s time to architect true
-                financial freedom.
-              </p>
-              <p>
-                Discover the exact, simple frameworks to automate your budget,
-                eliminate your debt, and multiply your cash flow—not through
-                restriction, but by managing wealth like a true steward.
-              </p>
-            </div>
+            <div className="hero-enter hidden md:block">
+              <div
+                className="relative mx-auto w-full max-w-[22rem] lg:max-w-none"
+                style={{ animationDelay: '0.3s' }}
+              >
+                <div
+                  className="pointer-events-none absolute -inset-8 blur-3xl"
+                  style={{
+                    background:
+                      'radial-gradient(circle, rgba(47,158,87,0.35) 0%, transparent 70%)',
+                  }}
+                  aria-hidden="true"
+                />
+                <div
+                  className="absolute -bottom-4 -right-4 h-full w-full rounded-brand border border-gold/35"
+                  aria-hidden="true"
+                />
 
-            <div className="mt-10 flex flex-wrap gap-3">
-              <Button href="/coaching" size="lg">Book a Coaching Call</Button>
-              <Button href="/shop" variant="ghost-dark" size="lg">Explore Products</Button>
+                <div className="relative aspect-[4/5] overflow-hidden rounded-brand border border-white/10 shadow-[0_30px_70px_-25px_rgba(0,0,0,0.75)]">
+                  <Image
+                    src={PORTRAITS.hero}
+                    alt="Rose M. Apabeloi"
+                    fill
+                    priority
+                    className="object-cover object-top"
+                    sizes="(min-width: 1024px) 24rem, 45vw"
+                  />
+                  <div
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                      background:
+                        'linear-gradient(to top, rgba(10,46,27,0.75) 0%, transparent 50%)',
+                    }}
+                  />
+                </div>
+
+                <div className="absolute -bottom-6 left-1/2 w-[88%] -translate-x-1/2 rounded-brand border border-white/15 bg-forest/90 px-5 py-3 text-center backdrop-blur-md">
+                  <p className="font-heading text-sm text-white">Rose M. Apabeloi</p>
+                  <p className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-gold">
+                    Founder · {SITE_NAME}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </Container>
@@ -193,20 +232,14 @@ export default function Home() {
             </Reveal>
 
             <Reveal delay={120}>
-              <div className="relative aspect-[4/5] overflow-hidden">
-                {portraitUrl ? (
-                  <Image
-                    src={portraitUrl}
-                    alt="Rose M. Apabeloi"
-                    fill
-                    className="object-cover object-top"
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                  />
-                ) : (
-                  <div className="flex h-full items-center justify-center bg-forest/80">
-                    <p className="text-center text-sm text-white/35">Portrait coming soon</p>
-                  </div>
-                )}
+              <div className="relative aspect-[4/5] overflow-hidden rounded-brand border border-white/10">
+                <Image
+                  src={PORTRAITS.feature}
+                  alt="Rose M. Apabeloi"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                />
                 <div
                   className="pointer-events-none absolute inset-0"
                   style={{ background: 'linear-gradient(to top, rgba(10,46,27,0.55) 0%, transparent 45%)' }}

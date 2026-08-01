@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Heading } from "@/components/ui/Heading";
 import { Badge } from "@/components/ui/Badge";
 import { Reveal } from "@/components/ui/Reveal";
 import { BookingWidget, type BookingMode } from "@/components/coaching/BookingWidget";
+import { PORTRAITS } from "@/lib/portraits";
 
 export const metadata: Metadata = {
   title: "1:1 Coaching Call",
@@ -122,12 +124,21 @@ export default function CoachingPage() {
             </Reveal>
 
             <Reveal delay={150}>
-              <div className="flex aspect-[4/3] items-center justify-center rounded-brand border border-white/10 bg-white/5">
-                <p className="text-center text-sm text-cream/30">
-                  Portrait
-                  <br />
-                  coming soon
-                </p>
+              <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-brand border border-white/10 shadow-[0_28px_60px_-24px_rgba(0,0,0,0.7)]">
+                <Image
+                  src={PORTRAITS.headshot}
+                  alt="Rose M. Apabeloi"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(min-width: 1024px) 24rem, 80vw"
+                  priority
+                />
+                <div
+                  className="pointer-events-none absolute inset-0"
+                  style={{
+                    background: "linear-gradient(to top, rgba(10,32,20,0.6) 0%, transparent 45%)",
+                  }}
+                />
               </div>
             </Reveal>
           </div>
@@ -226,12 +237,14 @@ export default function CoachingPage() {
             </Reveal>
 
             <Reveal delay={150}>
-              <div className="flex aspect-square items-center justify-center rounded-brand border border-line bg-emerald/5">
-                <p className="text-center text-sm text-muted">
-                  Portrait
-                  <br />
-                  coming soon
-                </p>
+              <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-brand border border-line shadow-[0_24px_50px_-24px_rgba(6,40,22,0.4)]">
+                <Image
+                  src={PORTRAITS.feature}
+                  alt="Rose M. Apabeloi"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(min-width: 768px) 28rem, 90vw"
+                />
               </div>
             </Reveal>
           </div>
