@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Heading } from "@/components/ui/Heading";
-import { Badge } from "@/components/ui/Badge";
 import { Reveal } from "@/components/ui/Reveal";
 import { BookingWidget, type BookingMode } from "@/components/coaching/BookingWidget";
 import { PORTRAITS } from "@/lib/portraits";
@@ -14,33 +13,33 @@ export const metadata: Metadata = {
     "Book a 45-minute 1:1 financial strategy session with Rose M. Apabeloi. $120. Walk away with a personalised wealth architecture plan.",
   openGraph: {
     title: "1:1 Coaching Call with Rose M. Apabeloi — $120 / 45 min",
-    description: "Personalised financial strategy session. Walk away with a clear, actionable wealth architecture plan.",
+    description:
+      "Personalised financial strategy session. Walk away with a clear, actionable wealth architecture plan.",
   },
 };
 
 const OUTCOMES = [
-  "A clear map of your income structure and where wealth is leaking",
-  "A personalised strategy for tax efficiency and corporate structuring",
-  "Actionable next steps you can implement the same week",
-  "Guidance on holding companies, multi-stream income, and long-term planning",
-  "Honest answers to the financial questions you have been afraid to ask",
+  "A clear map of your income structure",
+  "A personalised tax & structure strategy",
+  "Actionable next steps you can use this week",
+  "Guidance on multi-stream income & planning",
 ];
 
 const STEPS_PAY_FIRST = [
   {
     n: "01",
     title: "Book & Pay",
-    body: "Pay securely via Stripe, then pick a live available slot on the calendar. Rose is notified on Google Calendar the moment you book.",
+    body: "Pay securely, then pick a live slot. Rose is notified on Google Calendar instantly.",
   },
   {
     n: "02",
     title: "Prepare",
-    body: "Rose will send a short prep question so she can tailor the session to your exact situation before you join.",
+    body: "A short prep question so Rose can tailor the session to you.",
   },
   {
     n: "03",
     title: "Your Session",
-    body: "45 minutes of undivided, expert-level attention. No generic advice — just a focused plan built around you.",
+    body: "45 minutes of focused strategy — a plan built around you.",
   },
 ];
 
@@ -48,24 +47,18 @@ const STEPS_EMBED = [
   {
     n: "01",
     title: "Pick a Slot",
-    body: "Choose a live available time on the calendar below. Rose manages her availability in Cal.com — what you see is what’s open.",
+    body: "Choose a live available time on the calendar. What you see is what’s open.",
   },
   {
     n: "02",
     title: "Prepare",
-    body: "Rose will send a short prep question so she can tailor the session to your exact situation before you join.",
+    body: "A short prep question so Rose can tailor the session to you.",
   },
   {
     n: "03",
     title: "Your Session",
-    body: "45 minutes of undivided, expert-level attention. No generic advice — just a focused plan built around you.",
+    body: "45 minutes of focused strategy — a plan built around you.",
   },
-];
-
-const CREDENTIALS = [
-  "Master's in Accounting & Auditing — BI Norwegian Business School, 2022",
-  "12+ years in corporate accounting, strategic taxation, and entrepreneurship",
-  "Founder of RoseAudit",
 ];
 
 const FAQ = [
@@ -75,11 +68,11 @@ const FAQ = [
   },
   {
     q: "What platform is the call on?",
-    a: "We use video conferencing (link sent after booking). A stable internet connection is all you need.",
+    a: "Video conferencing — link sent after booking. A stable internet connection is all you need.",
   },
   {
     q: "Can I reschedule?",
-    a: "Yes — up to 24 hours before your session at no charge. Use the contact form or your booking confirmation to rearrange.",
+    a: "Yes — up to 24 hours before your session at no charge. Use the contact form or your booking confirmation.",
   },
 ];
 
@@ -98,45 +91,59 @@ export default function CoachingPage() {
 
   return (
     <main>
-      {/* ── Hero ── */}
-      <section className="bg-ink py-20 text-cream md:py-28">
-        <Container>
-          <div className="grid items-center gap-12 lg:grid-cols-2">
+      {/* ── 1. Hero ── */}
+      <section className="overflow-hidden bg-ink text-white">
+        <Container className="py-14 md:py-20 lg:py-24">
+          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-10">
             <Reveal>
-              <Badge variant="gold">1:1 Coaching Call</Badge>
-              <Heading level={1} className="mt-6 text-cream">
-                Wealth Architecture, Tailored to You
-              </Heading>
-              <p className="mt-5 max-w-lg text-lg leading-relaxed text-cream/70">
-                One focused session. Rose reviews your exact situation and gives you a
-                personalised financial roadmap — structured, actionable, and built to last.
-              </p>
+              <div className="hero-enter">
+                <p className="inline-block rounded-full bg-gold px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-ink">
+                  1:1 Coaching Call
+                </p>
 
-              <div className="mt-8 flex flex-wrap items-center gap-6">
-                <a
-                  href="#book"
-                  className="inline-flex items-center justify-center rounded-brand border border-gold bg-gold px-8 py-4 text-base font-medium tracking-wide text-ink transition-all duration-200 hover:bg-gold/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
-                >
-                  Book Your Call — $120
-                </a>
-                <span className="text-sm text-cream/50">45 minutes · Secure checkout</span>
+                <h1 className="mt-6 text-thick-white text-[clamp(2.75rem,8vw,5rem)] leading-[0.95]">
+                  Ready to turn your
+                  <br />
+                  <span className="text-thick-pink">passion into profit?</span>
+                </h1>
+
+                <p className="font-script mt-3 text-[clamp(2rem,5vw,3.25rem)] text-cyan">
+                  Book Today
+                </p>
+
+                <p className="mt-6 max-w-md text-base leading-relaxed text-white/70 sm:text-lg">
+                  One focused session. A personalised financial roadmap — structured,
+                  actionable, and built to last.
+                </p>
+
+                <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6">
+                  <a
+                    href="#book"
+                    className="gradient-pink-blue inline-flex items-center justify-center rounded-brand px-10 py-5 text-lg font-extrabold uppercase tracking-wide text-ink shadow-lg transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hotpink focus-visible:ring-offset-2 focus-visible:ring-offset-ink sm:px-12 sm:py-6 sm:text-xl"
+                  >
+                    Book Your Call — $120
+                  </a>
+                  <span className="text-sm font-semibold uppercase tracking-wider text-white/50">
+                    45 minutes · Secure checkout
+                  </span>
+                </div>
               </div>
             </Reveal>
 
-            <Reveal delay={150}>
-              <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-brand border border-white/10 shadow-[0_28px_60px_-24px_rgba(0,0,0,0.7)]">
+            <Reveal delay={120}>
+              <div className="hero-portrait relative mx-auto aspect-[3/4] w-full max-w-lg overflow-hidden border-4 border-pink lg:max-w-none lg:min-h-[580px]">
                 <Image
-                  src={PORTRAITS.headshot}
+                  src={PORTRAITS.hero}
                   alt="Rose M. Apabeloi"
                   fill
-                  className="object-cover object-top"
-                  sizes="(min-width: 1024px) 24rem, 80vw"
                   priority
+                  className="object-cover object-top"
+                  sizes="(min-width: 1024px) 50vw, 90vw"
                 />
                 <div
-                  className="pointer-events-none absolute inset-0"
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4"
                   style={{
-                    background: "linear-gradient(to top, rgba(10,32,20,0.6) 0%, transparent 45%)",
+                    background: "linear-gradient(to top, #0A0A0A 0%, transparent 100%)",
                   }}
                 />
               </div>
@@ -145,35 +152,60 @@ export default function CoachingPage() {
         </Container>
       </section>
 
+      {/* ── 2. Calendar / booking (directly after hero) ── */}
+      <section id="book" className="border-b border-line bg-white py-16 md:py-20">
+        <Container>
+          <Reveal>
+            <div className="mx-auto mb-10 max-w-2xl text-center">
+              <h2 className="text-thick-black text-[clamp(2rem,5vw,3.5rem)]">
+                Book Your 1:1 Session
+              </h2>
+              <p className="mt-3 text-base font-semibold uppercase tracking-wide text-hotpink">
+                Pick a time · Syncs to Rose&apos;s calendar
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal delay={80}>
+            <BookingWidget mode={mode} bookingUrl={bookingUrl} />
+          </Reveal>
+
+          <p className="mx-auto mt-8 max-w-sm text-center text-xs text-muted">
+            Questions first?{" "}
+            <a
+              href="/contact"
+              className="font-semibold text-hotpink underline underline-offset-2 hover:opacity-80"
+            >
+              Contact us
+            </a>
+          </p>
+        </Container>
+      </section>
+
       {/* ── Outcomes ── */}
       <Section className="border-t border-line">
         <Container>
           <Reveal>
             <div className="mx-auto mb-12 max-w-xl text-center">
-              <span className="mb-4 block text-xs font-medium uppercase tracking-widest text-gold">
+              <h2 className="text-thick-pink text-[clamp(1.75rem,4vw,2.75rem)]">
                 What You Get
-              </span>
-              <Heading level={2}>You Will Leave With Clarity</Heading>
-              <p className="mt-4 text-muted">
-                45 minutes of focused, expert-level financial strategy — not templates, not
-                generic advice.
-              </p>
+              </h2>
             </div>
           </Reveal>
 
-          <div className="mx-auto max-w-2xl">
-            <ul className="space-y-4">
-              {OUTCOMES.map((outcome, i) => (
-                <Reveal key={outcome} delay={i * 80}>
-                  <li className="flex gap-4 rounded-brand border border-line bg-white p-5">
-                    <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-emerald/10 text-xs font-semibold text-emerald">
-                      {i + 1}
-                    </span>
-                    <p className="text-sm leading-relaxed text-ink">{outcome}</p>
-                  </li>
-                </Reveal>
-              ))}
-            </ul>
+          <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
+            {OUTCOMES.map((outcome, i) => (
+              <Reveal key={outcome} delay={i * 60}>
+                <div className="flex gap-3 border-2 border-ink bg-white p-5">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-sky text-xs font-bold text-white">
+                    {i + 1}
+                  </span>
+                  <p className="text-sm font-bold uppercase tracking-wide text-ink">
+                    {outcome}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </Container>
       </Section>
@@ -182,21 +214,22 @@ export default function CoachingPage() {
       <Section className="border-t border-line bg-white">
         <Container>
           <Reveal>
-            <div className="mx-auto mb-14 max-w-lg text-center">
-              <span className="mb-4 block text-xs font-medium uppercase tracking-widest text-gold">
-                The Process
-              </span>
-              <Heading level={2}>How It Works</Heading>
+            <div className="mx-auto mb-12 max-w-lg text-center">
+              <h2 className="text-thick-black text-[clamp(1.75rem,4vw,2.75rem)]">
+                How It Works
+              </h2>
             </div>
           </Reveal>
 
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-3">
             {steps.map((step, i) => (
-              <Reveal key={step.n} delay={i * 100}>
-                <div className="h-full rounded-brand border border-line p-8">
-                  <span className="font-heading text-3xl text-gold/40">{step.n}</span>
-                  <h3 className="mt-4 font-heading text-xl text-ink">{step.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted">{step.body}</p>
+              <Reveal key={step.n} delay={i * 80}>
+                <div className="h-full border-2 border-ink p-7">
+                  <span className="text-thick-sky text-3xl">{step.n}</span>
+                  <h3 className="mt-3 text-xl font-extrabold uppercase tracking-wide text-ink">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{step.body}</p>
                 </div>
               </Reveal>
             ))}
@@ -204,106 +237,27 @@ export default function CoachingPage() {
         </Container>
       </Section>
 
-      {/* ── Credentials ── */}
+      {/* ── FAQ ── */}
       <Section className="border-t border-line">
         <Container>
-          <div className="grid items-center gap-12 md:grid-cols-2">
-            <Reveal>
-              <span className="mb-4 block text-xs font-medium uppercase tracking-widest text-gold">
-                Your Guide
-              </span>
-              <Heading level={2}>Rose M. Apabeloi</Heading>
-              <p className="mt-4 leading-relaxed text-muted">
-                Rose is an accountant who has spent 12+ years inside corporate
-                accounting, strategic taxation, and entrepreneurship. She founded RoseAudit to
-                close the gap between complex financial systems and the families and business
-                owners who need them most.
-              </p>
-              <p className="mt-4 leading-relaxed text-muted">
-                This is not generic financial coaching. Rose brings the rigour of a corporate
-                accountant to your personal and business finances — and translates it into a
-                language and plan you can actually use.
-              </p>
-              <ul className="mt-8 space-y-2">
-                {CREDENTIALS.map((c) => (
-                  <li key={c}>
-                    <span className="inline-flex items-center gap-2 rounded-full border border-gold/25 bg-gold/8 px-3 py-1 text-xs font-medium text-ink">
-                      <span className="h-1 w-1 rounded-full bg-gold" />
-                      {c}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-
-            <Reveal delay={150}>
-              <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-brand border border-line shadow-[0_24px_50px_-24px_rgba(6,40,22,0.4)]">
-                <Image
-                  src={PORTRAITS.feature}
-                  alt="Rose M. Apabeloi"
-                  fill
-                  className="object-cover object-top"
-                  sizes="(min-width: 768px) 28rem, 90vw"
-                />
-              </div>
-            </Reveal>
-          </div>
-        </Container>
-      </Section>
-
-      {/* ── FAQ ── */}
-      <Section className="border-t border-line bg-white">
-        <Container>
           <Reveal>
-            <div className="mx-auto mb-12 max-w-lg text-center">
+            <div className="mx-auto mb-10 max-w-lg text-center">
               <Heading level={2}>Questions</Heading>
             </div>
           </Reveal>
 
           <div className="mx-auto max-w-2xl divide-y divide-line">
             {FAQ.map((item, i) => (
-              <Reveal key={item.q} delay={i * 80}>
+              <Reveal key={item.q} delay={i * 60}>
                 <div className="py-6">
-                  <h3 className="font-heading text-lg text-ink">{item.q}</h3>
+                  <h3 className="text-lg font-bold uppercase tracking-wide text-ink">
+                    {item.q}
+                  </h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted">{item.a}</p>
                 </div>
               </Reveal>
             ))}
           </div>
-        </Container>
-      </Section>
-
-      {/* ── Booking ── */}
-      <Section id="book" className="border-t border-line">
-        <Container>
-          <Reveal>
-            <div className="mx-auto mb-10 max-w-lg text-center">
-              <span className="mb-4 block text-xs font-medium uppercase tracking-widest text-gold">
-                Reserve Your Spot
-              </span>
-              <Heading level={2}>Book Your 1:1 Session</Heading>
-              <p className="mt-4 text-muted">
-                Sessions fill quickly. Secure your 45 minutes with Rose below.
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal delay={100}>
-            <BookingWidget mode={mode} bookingUrl={bookingUrl} />
-          </Reveal>
-
-          <Reveal delay={150}>
-            <p className="mx-auto mt-8 max-w-sm text-center text-xs text-muted">
-              Have a question before booking?{" "}
-              <a
-                href="/contact"
-                className="text-emerald underline underline-offset-2 transition-opacity hover:opacity-80"
-              >
-                Contact us
-              </a>{" "}
-              and we&apos;ll get back to you within 24 hours.
-            </p>
-          </Reveal>
         </Container>
       </Section>
     </main>

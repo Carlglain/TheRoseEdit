@@ -4,30 +4,23 @@ export const SITE_NAME = "RoseAudit";
 
 export const CONTACT_EMAIL = "theroseaudit@gmail.com";
 
-// TODO: confirm WhatsApp number/link with client.
 export const WHATSAPP_URL = "https://wa.me/";
 
-/** Always visible in the top bar */
+/** Top-bar navigation — Vendors lives under Shop, not as its own tab */
 export const PRIMARY_NAV: NavItem[] = [
+  { label: "Home", href: "/" },
+  { label: "E-Books", href: "/e-books" },
+  { label: "Courses", href: "/courses" },
+  { label: "Shop", href: "/shop" },
+  { label: "Coaching", href: "/coaching" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
-/** Opens in the sidebar menu */
-export const SIDEBAR_NAV: NavItem[] = [
-  { label: "Home", href: "/" },
-  { label: "Shop", href: "/shop" },
-  { label: "Courses", href: "/courses" },
-  { label: "E-Books", href: "/e-books" },
-  { label: "Vendors", href: "/vendors" },
-  { label: "Coaching", href: "/coaching" },
-];
+/** @deprecated use PRIMARY_NAV — kept for any leftover imports */
+export const SIDEBAR_NAV: NavItem[] = PRIMARY_NAV;
 
-/** Full list for footer / sitemaps */
-export const NAV_ITEMS: NavItem[] = [
-  ...SIDEBAR_NAV,
-  ...PRIMARY_NAV,
-];
+export const NAV_ITEMS: NavItem[] = PRIMARY_NAV;
 
 export const LEGAL_LINKS: NavItem[] = [
   { label: "Privacy", href: "/legal/privacy" },
