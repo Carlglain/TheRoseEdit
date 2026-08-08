@@ -28,11 +28,13 @@ export async function submitContactForm(
     name: formData.get("name"),
     email: formData.get("email"),
     message: formData.get("message"),
-    website: formData.get("website") ?? "",
+    // Obscure name so password managers don't autofill the honeypot.
+    website: formData.get("company_url_hp") ?? "",
   };
 
   // Honeypot triggered — silently succeed to not tip off bots.
   if (typeof raw.website === "string" && raw.website.length > 0) {
+    console.error("[contact] honeypot filled — skipping email/db");
     return { success: true };
   }
 
@@ -49,6 +51,7 @@ export async function submitContactForm(
   }
 
   const { name, email, message } = parsed.data;
+  console.error("[contact] saving lead + sending email →", CONTACT_EMAIL);
 
   // Persist to leads table — if this fails, surface the error.
   try {
@@ -57,18 +60,36 @@ export async function submitContactForm(
       .from("leads")
       .insert({ email, name, message, source: "contact" });
     if (dbError) throw dbError;
-  } catch {
+  } catch (err) {
+    console.error("[contact] db insert failed:", err);
     return { error: "Something went wrong. Please try again or email us directly." };
   }
 
   // Email Rose — non-fatal; message is already saved to the DB.
-  const FROM_ADDRESS = process.env.RESEND_FROM_EMAIL ?? "RoseAudit <onboarding@resend.dev>";
+  // Match Resend's working test sender when RESEND_FROM_EMAIL is unset.
+  const FROM_ADDRESS = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
   try {
+    if (!process.env.RESEND_API_KEY) {
+      console.error("[contact] RESEND_API_KEY is missing in this process");
+    }
     const { subject, html, text } = renderContactNotificationEmail({ name, email, message });
     const resend = createResendClient();
-    await resend.emails.send({ from: FROM_ADDRESS, to: CONTACT_EMAIL, subject, html, text });
+    const { data, error } = await resend.emails.send({
+      from: FROM_ADDRESS,
+      to: CONTACT_EMAIL,
+      subject,
+      html,
+      text,
+    });
+
+    // Resend returns { error } instead of throwing on API failures — must check it.
+    if (error) {
+      console.error("[contact] Resend error:", error);
+    } else {
+      console.error("[contact] Resend ok:", data?.id, "from=", FROM_ADDRESS, "to=", CONTACT_EMAIL);
+    }
   } catch (err) {
-    console.error("Contact notification email failed (message saved to DB):", err);
+    console.error("[contact] Resend threw:", err);
   }
 
   return { success: true };

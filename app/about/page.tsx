@@ -7,6 +7,7 @@ import { Heading } from "@/components/ui/Heading";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { IS_FOR_YOU, NOT_FOR_YOU } from "@/lib/constants";
+import { PORTRAITS } from "@/lib/portraits";
 
 export const metadata: Metadata = {
   title: "About Rose M. Apabeloi",
@@ -57,8 +58,6 @@ const TIMELINE = [
       "Bringing corporate-grade financial strategy out of the boardroom and into homes, families, and growing businesses.",
   },
 ];
-
-const portraitUrl = process.env.PORTRAIT_URL ?? "";
 
 export default function AboutPage() {
   return (
@@ -116,24 +115,14 @@ export default function AboutPage() {
                   }}
                 />
                 <div className="relative aspect-[4/5] overflow-hidden rounded-brand shadow-[0_28px_60px_-24px_rgba(6,40,22,0.45)]">
-                  {portraitUrl ? (
-                    <Image
-                      src={portraitUrl}
-                      alt="Rose M. Apabeloi"
-                      fill
-                      className="object-cover object-top"
-                      sizes="(min-width: 1024px) 40vw, 100vw"
-                      priority
-                    />
-                  ) : (
-                    <div className="flex h-full items-center justify-center bg-forest/10">
-                      <p className="text-center text-sm text-muted">
-                        Portrait
-                        <br />
-                        coming soon
-                      </p>
-                    </div>
-                  )}
+                  <Image
+                    src={PORTRAITS.hero}
+                    alt="Rose M. Apabeloi"
+                    fill
+                    className="object-cover object-top"
+                    sizes="(min-width: 1024px) 40vw, 100vw"
+                    priority
+                  />
                 </div>
               </div>
             </Reveal>

@@ -22,10 +22,17 @@ export function ContactForm() {
 
   return (
     <form action={formAction} className="space-y-5" noValidate>
-      {/* Honeypot — hidden from real users, traps bots */}
-      <div aria-hidden="true" tabIndex={-1} style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none" }}>
-        <label htmlFor="website">Leave this empty</label>
-        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      {/* Honeypot — hidden from real users, traps bots. Obscure name avoids autofill. */}
+      <div aria-hidden="true" tabIndex={-1} style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, overflow: "hidden" }}>
+        <label htmlFor="company_url_hp">Company URL</label>
+        <input
+          id="company_url_hp"
+          name="company_url_hp"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          defaultValue=""
+        />
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">

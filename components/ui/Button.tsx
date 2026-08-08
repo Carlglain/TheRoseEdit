@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-type Variant = "primary" | "secondary" | "ghost" | "gold" | "ghost-dark";
+type Variant = "primary" | "secondary" | "ghost" | "gold" | "ghost-dark" | "promo";
 type Size = "sm" | "md" | "lg";
 
 interface ButtonProps {
@@ -16,25 +16,27 @@ interface ButtonProps {
 }
 
 const BASE =
-  "inline-flex items-center justify-center font-semibold tracking-wide rounded-brand transition-[transform,opacity,background-color,border-color,color,box-shadow] duration-200 ease-out hover:-translate-y-px active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 motion-reduce:hover:translate-y-0";
+  "inline-flex items-center justify-center font-bold tracking-wide uppercase transition-[transform,opacity] duration-200 ease-out hover:-translate-y-px active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hotpink focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 motion-reduce:hover:translate-y-0";
 
 const VARIANTS: Record<Variant, string> = {
   primary:
-    "gradient-emerald text-white border-0 shadow-sm shadow-emerald/20 hover:opacity-95",
+    "gradient-pink-blue text-ink border-0 shadow-md",
+  promo:
+    "gradient-pink-blue text-ink border-0 shadow-lg rounded-full",
   secondary:
-    "bg-transparent text-emerald hover:bg-emerald hover:text-white border border-emerald",
+    "bg-transparent text-ink border-2 border-ink hover:bg-ink hover:text-white",
   ghost:
-    "bg-transparent text-ink hover:text-emerald border border-line hover:border-emerald/40",
+    "bg-transparent text-ink border border-line hover:border-ink",
   gold:
     "bg-gold text-ink hover:bg-gold/90 border border-gold/80",
   "ghost-dark":
-    "bg-transparent text-white hover:bg-white/10 border border-white/25 hover:border-white/45",
+    "bg-transparent text-white hover:bg-white/10 border-2 border-white/40",
 };
 
 const SIZES: Record<Size, string> = {
-  sm: "px-4 py-2 text-sm",
-  md: "px-6 py-3 text-sm",
-  lg: "px-8 py-4 text-base",
+  sm: "px-4 py-2 text-xs rounded-brand",
+  md: "px-6 py-3 text-sm rounded-brand",
+  lg: "px-10 py-4 text-base rounded-brand",
 };
 
 export function Button({

@@ -89,7 +89,7 @@ export default function RootLayout({
 
         <CartProvider>
           <Header />
-          <div className="flex min-h-0 flex-1 flex-col lg:ml-[var(--sidebar-w)]">
+          <div className="flex min-h-0 flex-1 flex-col">
             <div id="main-content" tabIndex={-1} className="flex-1 outline-none">
               {children}
             </div>
