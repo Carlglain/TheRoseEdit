@@ -34,10 +34,16 @@ const greatVibes = Great_Vibes({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+function resolveSiteUrl(): string {
+  const raw = (process.env.NEXT_PUBLIC_SITE_URL || "").trim();
+  try {
+    if (raw) return new URL(raw).origin;
+  } catch {}
+  return "http://localhost:3000";
+}
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(resolveSiteUrl()),
   title: {
     default: "RoseAudit — Wealth Architecture for Generational Legacy",
     template: "%s — RoseAudit",
