@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CircleCheck } from "lucide-react";
+import { CircleCheck, TrendingUp, Building2, BookOpen } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
@@ -19,6 +19,27 @@ const HELP_POINTS = [
   "Master money & cash flow",
   "Sell resellable products",
   "Architect lasting wealth",
+];
+
+const PILLARS = [
+  {
+    label: "Personal Finance",
+    description:
+      "Master your money, build automated digital income, and become a wealth architect — from a payslip mindset to an asset-owner mindset.",
+    Icon: TrendingUp,
+  },
+  {
+    label: "Increasing Cash Flow",
+    description:
+      "Clean structures and automated systems to scale digital products and multi-stream income.",
+    Icon: Building2,
+  },
+  {
+    label: "Financial Literacy for the Next Generation",
+    description:
+      "Practical tools for parents to teach children asset management, investing, and healthy money habits.",
+    Icon: BookOpen,
+  },
 ];
 
 export default function Home() {
@@ -158,6 +179,54 @@ export default function Home() {
                 </Link>
               ))}
             </div>
+          </Reveal>
+        </Container>
+      </section>
+
+      {/* ── Coming soon — What We Build Together ── */}
+      <section className="bg-ink py-20 md:py-28">
+        <Container>
+          <Reveal>
+            <div className="mx-auto mb-14 max-w-xl text-center">
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-mint">
+                The Framework
+              </p>
+              <h2 className="text-thick-white text-[clamp(2rem,5vw,3.25rem)]">
+                What We Build Together
+              </h2>
+              <p className="mt-4 text-white/55">
+                Three pillars of wealth architecture — for you, your business, and the next
+                generation.
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="grid gap-6 md:grid-cols-3 md:gap-8">
+            {PILLARS.map((pillar, i) => (
+              <Reveal key={pillar.label} delay={i * 100}>
+                <div className="coming-soon-card flex h-full flex-col p-8 md:p-9">
+                  <div className="mb-6 text-pink">
+                    <pillar.Icon size={28} strokeWidth={1.25} aria-hidden="true" />
+                  </div>
+                  <h3 className="font-heading text-xl font-light text-white">{pillar.label}</h3>
+                  <p className="mt-3 flex-1 text-sm leading-relaxed text-white/55">
+                    {pillar.description}
+                  </p>
+                  <span className="mt-8 inline-flex w-full items-center justify-center rounded-brand bg-hotpink px-5 py-3 text-sm font-bold uppercase tracking-wide text-white">
+                    Coming Soon
+                  </span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={200}>
+            <blockquote className="mx-auto mt-16 max-w-2xl border-l-4 border-cyan pl-6">
+              <p className="font-heading text-lg font-light italic leading-relaxed text-white/70">
+                &ldquo;Bridge the gap between heavy active work and lifestyle freedom — with
+                systems that keep working for you.&rdquo;
+              </p>
+            </blockquote>
           </Reveal>
         </Container>
       </section>

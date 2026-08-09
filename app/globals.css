@@ -208,6 +208,22 @@ body {
   background: #fff;
 }
 
+/* Coming soon pillar cards — glass panels on dark, new palette accents */
+.coming-soon-card {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius);
+  transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.coming-soon-card:hover {
+  border-color: rgba(232, 121, 184, 0.55);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.06) 100%);
+  box-shadow: 0 12px 36px rgba(232, 121, 184, 0.12);
+  transform: translateY(-3px);
+}
+
 /* ─── Light motion ──────────────────────────────────────────────── */
 @keyframes hero-enter {
   from { opacity: 0; transform: translateY(18px); }
@@ -280,6 +296,10 @@ body {
   }
 
   .category-tile:hover {
+    transform: none;
+  }
+
+  .coming-soon-card:hover {
     transform: none;
   }
 }
